@@ -327,8 +327,8 @@ def jdrf(x_train, y_train,x_test, y_test):
     return acc, pre, rec, f1, predict_list
 
 
-source_data = pd.read_csv('C:/Users/s3929438/all_features_mobile_100_all_final_latest.csv', index_col=[1,2])
-target_data = pd.read_csv('C:/Users/s3929438/all_features_tablet_100_all_latest.csv',index_col=[1,2])
+source_data = pd.read_csv('all_features_mobile_all_latest.csv', index_col=[1,2])
+target_data = pd.read_csv('all_features_tablet_all_latest.csv',index_col=[1,2])
 # all_features_tablet_100_all_latest
 
 source_data = source_data.loc[:, ~source_data.columns.str.contains('^Unnamed')]
@@ -380,11 +380,11 @@ tar_imposter_sample_index = list(np.random.choice(tar_all_imposters.index.get_le
                                                   replace=False))
 tar_imposters = tar_all_imposters.loc[tar_all_imposters.index.get_level_values(0).isin(tar_imposter_sample_index)]
 
-src_train_gen, src_val_gen, src_test_gen = split_dataset(src_user, 0.3, 0.2)
-tar_train_gen, tar_val_gen, tar_test_gen = split_dataset(tar_user, 0.3, 0.2)
+src_train_gen, src_val_gen, src_test_gen = split_dataset(src_user, 0.4, 0.33)
+tar_train_gen, tar_val_gen, tar_test_gen = split_dataset(tar_user, 0.4, 0.33)
 
-src_train_imp, src_val_imp, src_test_imp = split_dataset(src_imposters, 0.3, 0.2)
-tar_train_imp, tar_val_imp, tar_test_imp = split_dataset(tar_imposters, 0.3, 0.2)
+src_train_imp, src_val_imp, src_test_imp = split_dataset(src_imposters, 0.4, 0.33)
+tar_train_imp, tar_val_imp, tar_test_imp = split_dataset(tar_imposters, 0.4, 0.33)
 
 src_train = pd.concat([src_train_gen,src_train_imp])
 src_val = pd.concat([src_val_gen,src_val_imp])
